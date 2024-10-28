@@ -9,13 +9,15 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  */
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: 'My App',
+    title: 'UIs',
   },
   links: [
     {
-      text: 'Documentation',
-      url: '/docs',
+      text: 'Components',
+      url: '/components',
       active: 'nested-url',
     },
   ],
+
+  githubUrl: 'https://github.com/danpoj',
 };
