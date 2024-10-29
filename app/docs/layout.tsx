@@ -6,7 +6,13 @@ import { BackgroundPatterns } from '@/components/background-patterns';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <DocsLayout tree={source.pageTree} {...baseOptions}>
+    <DocsLayout
+      sidebar={{
+        defaultOpenLevel: 1,
+      }}
+      tree={source.pageTree}
+      {...baseOptions}
+    >
       <BackgroundPatterns />
       {children}
     </DocsLayout>

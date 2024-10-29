@@ -1,0 +1,226 @@
+---
+title: Avatar
+description: Avatars represent a user or a team. Stacked avatars represent a group of people
+---
+
+import { Example1, Example2 } from '@/components/avatar/avatar-example';
+
+<hr />
+
+<Example1>
+  ```tsx
+  <div className='flex items-end gap-1.5'>
+    <Avatar
+      src='https://avatars.githubusercontent.com/u/9113740?v=4'
+      width={34}
+      height={34}
+    />
+    <Avatar src='https://avatars.githubusercontent.com/u/9113740?v=4' />
+    <Avatar
+      src='https://avatars.githubusercontent.com/u/9113740?v=4'
+      width={46}
+      height={46}
+    />
+    <Avatar
+      src='https://avatars.githubusercontent.com/u/9113740?v=4'
+      width={52}
+      height={52}
+    />
+  </div>
+  ```
+</Example1>
+
+<Example2>
+  ```tsx
+<AvatarGroup
+    size={40}
+    avatars={[
+      {
+        src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+      },
+      {
+        src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+      },
+      {
+        src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+      },
+      {
+        src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+      },
+      {
+        src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+      },
+      {
+        src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+      },
+      {
+        src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+      },
+    ]}
+/>
+
+<AvatarGroup
+  viewCount={4}
+  size={40}
+  avatars={[
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+  ]}
+/>
+
+<AvatarGroup
+  isRest={false}
+  size={40}
+  avatars={[
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+    {
+      src: 'https://avatars.githubusercontent.com/u/9113740?v=4',
+    },
+  ]}
+/>
+
+````
+</Example2>
+
+<hr />
+
+## implementation
+
+```tsx title="@/components/avatar"
+'use client';
+
+import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import { useState } from 'react';
+
+export const AvatarGroup = ({
+  size,
+  avatars,
+  className,
+  restClassName,
+  viewCount = 3,
+  isRest = true,
+}: {
+  size: number;
+  avatars: {
+    src: string;
+    alt?: string;
+  }[];
+  className?: string;
+  viewCount?: number;
+  restClassName?: string;
+  isRest?: boolean;
+}) => {
+  return (
+    <div className={cn('flex items-center -space-x-3', className)}>
+      {isRest && avatars.length > viewCount ? (
+        <>
+          {avatars.slice(0, viewCount).map((avatar, i) => (
+            <Avatar
+              key={i}
+              src={avatar.src}
+              alt={avatar.alt}
+              width={size}
+              height={size}
+            />
+          ))}
+          <div
+            style={{
+              width: size,
+              height: size,
+            }}
+            className={cn(
+              'rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-semibold z-[1] border',
+              restClassName
+            )}
+          >
+            +{avatars.length - viewCount}
+          </div>
+        </>
+      ) : (
+        <>
+          {avatars.map((avatar, i) => (
+            <Avatar
+              key={i}
+              src={avatar.src}
+              alt={avatar.alt}
+              width={size}
+              height={size}
+            />
+          ))}
+        </>
+      )}
+    </div>
+  );
+};
+
+export const Avatar = ({
+  className,
+  src,
+  alt = 'image alt',
+  width = 40,
+  height = 40,
+}: {
+  className?: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+  src: string;
+}) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <Image
+      alt={alt}
+      src={src}
+      className={cn(
+        'object-cover duration-500 ease-in-out rounded-full border',
+        className,
+        isLoading
+          ? 'scale-100 blur-[1px] grayscale'
+          : 'scale-100 blur-0 grayscale-0'
+      )}
+      width={width}
+      height={height}
+      onLoad={() => setIsLoading(false)}
+    />
+  );
+};
+
+````

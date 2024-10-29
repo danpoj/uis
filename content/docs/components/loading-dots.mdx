@@ -1,0 +1,103 @@
+---
+title: Loading Dots
+description: Indicate an action running in the background.
+---
+
+import { LoadingDotsExample } from '@/components/loading-dots';
+
+<hr />
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value='Preview' className="flex flex-col gap-4">
+    <LoadingDotsExample className='size-[4px]'/>
+    <LoadingDotsExample className='size-[5px]'/>
+    <LoadingDotsExample className='size-[6px]'/>
+    <LoadingDotsExample className='size-[7px]'/>
+    <LoadingDotsExample className='size-[8px]'/>
+  </Tab>
+  <Tab value='Code'>
+  ```tsx
+import { LoadingDots } from '@/components/loading-dots';
+
+export const Example = () => {
+    return <LoadingDots className='size-[5px]' />;
+};
+```
+</Tab>
+</Tabs>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value='Preview'>
+    <div className="flex flex-col gap-4">
+    <LoadingDotsExample className="bg-green-500"/>
+    <LoadingDotsExample className="bg-red-500"/>
+    <LoadingDotsExample className="bg-amber-500"/>
+    <LoadingDotsExample className="bg-fuchsia-500"/>
+    <LoadingDotsExample className="bg-violet-500"/>
+    <LoadingDotsExample className="bg-orange-500"/>
+    <LoadingDotsExample className="bg-lime-500"/>
+    <LoadingDotsExample className="bg-teal-500"/>
+    <LoadingDotsExample className="bg-indigo-500"/>
+    </div>
+  </Tab>
+  <Tab value='Code'>
+  ```tsx
+import { LoadingDots } from '@/components/loading-dots';
+
+export const Example = () => {
+    return <LoadingDots className="bg-green-500"/>;
+};
+```
+</Tab>
+</Tabs>
+
+<hr />
+
+## implementation
+
+```tsx title="@/components/loading-dots.tsx"
+import { cn } from '@/lib/utils';
+
+export const LoadingDots = ({ className }: { className?: string }) => {
+  return (
+    <span className='inline-flex items-center'>
+      <Dot delay='0s' className={className} />
+      <Dot delay='0.2s' className={className} />
+      <Dot delay='0.4s' className={className} />
+    </span>
+  );
+};
+
+const Dot = ({
+  delay,
+  className,
+}: {
+  delay: '0s' | '0.2s' | '0.4s';
+  className?: string;
+}) => (
+  <span
+    style={{ animationDelay: delay }}
+    className={cn(
+      'animate-blink size-[5px] rounded-full inline-block my-0 mx-[1px] bg-foreground',
+      className
+    )}
+  />
+);
+```
+
+```js title="@/tailwind.config.js"
+theme: {
+  extend: {
+    keyframes: {
+      blink: {
+        '0%': { opacity: '0.2' },
+        '20%': { opacity: '1' },
+        '100%': { opacity: '0.2' },
+      },
+    },
+    animation: {
+      blink: 'blink 1.4s infinite both',
+    },
+  },
+},
+```

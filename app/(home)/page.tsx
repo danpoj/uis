@@ -27,10 +27,10 @@ export default function HomePage() {
 
           <p className='text-fd-muted-foreground'>
             <Link
-              href='/components'
+              href='/docs'
               className='bg-black dark:bg-white rounded w-fit text-white dark:text-black px-4 py-1.5'
             >
-              /components
+              /docs
             </Link>{' '}
           </p>
         </motion.div>
