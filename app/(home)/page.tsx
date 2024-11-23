@@ -19,16 +19,16 @@ export default function HomePage() {
           className='relative flex flex-col gap-4 items-center justify-center px-4 mb-24'
         >
           <h2 className='bg-clip-text text-transparent text-center bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-600 dark:to-white text-7xl font-sans relative z-20 font-bold tracking-tight'>
-            UIs
+            References
           </h2>
           <p className='max-w-xl mx-auto text-sm md:text-lg text-neutral-700 dark:text-neutral-400 text-center'>
-            references to build web UIs using shadcn.ui
+            references to build web (shadUI, Convex)
           </p>
 
           <p className='text-fd-muted-foreground'>
             <Link
               href='/docs'
-              className='bg-black dark:bg-white rounded w-fit text-white dark:text-black px-4 py-1.5'
+              className='bg-gradient-to-b from-primary/80 to-primary text-primary-foreground rounded px-4 py-1.5'
             >
               /docs
             </Link>{' '}
